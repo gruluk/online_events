@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:online_events/pages/upcoming_events/bedpress.dart';
 import 'package:online_events/pages/upcoming_events/profile_button.dart';
 import 'package:online_events/pages/upcoming_events/promoted_article.dart';
+import 'package:online_events/services/app_navigator.dart';
 
 import 'upcoming_events.dart';
 import '/theme.dart';
@@ -41,7 +42,9 @@ class OnlineScaffold extends StatelessWidget {
   final Widget? header;
   final Widget content;
 
-  const OnlineScaffold({super.key, this.header, required this.content});
+  final bool scrollable;
+
+  const OnlineScaffold({super.key, this.header, required this.content, this.scrollable = true});
 
   @override
   Widget build(BuildContext context) {
@@ -55,46 +58,65 @@ class OnlineScaffold extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 17),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'assets/header.svg',
-                  height: 36,
-                  fit: BoxFit.fitHeight,
-                ),
-                if (header != null) header!,
-              ],
+            SizedBox(
+              height: 48,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () => AppNavigator.navigateTo(const UpcomingEventsPage(), additive: false),
+                    child: SvgPicture.asset(
+                      'assets/header.svg',
+                      height: 36,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                  if (header != null) header!,
+                ],
+              ),
             ),
             const SizedBox(height: 30),
             Expanded(
-              child: ShaderMask(
-                shaderCallback: (bounds) {
-                  return const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0x00FFFFFF),
-                      Color(0xFFFFFFFF),
-                    ],
-                    stops: [
-                      0.0,
-                      0.05,
-                    ],
-                  ).createShader(bounds);
-                },
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const SizedBox(height: 30),
-                      content,
-                    ],
-                  ),
-                ),
-              ),
+              child: scrollable ? _scrollableContent() : _staticContent(),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _staticContent() {
+    return Column(
+      children: [
+        const SizedBox(height: 30),
+        content,
+      ],
+    );
+  }
+
+  Widget _scrollableContent() {
+    return ShaderMask(
+      shaderCallback: (bounds) {
+        return const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0x00FFFFFF),
+            Color(0xFFFFFFFF),
+          ],
+          stops: [
+            0.0,
+            0.05,
+          ],
+        ).createShader(bounds);
+      },
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 30),
+            content,
           ],
         ),
       ),

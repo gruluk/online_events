@@ -134,7 +134,7 @@ class ProfilePage extends StatelessWidget {
           SizedBox(
             height: 40,
             child: CustomPaint(
-              painter: StudyCoursePainter(year: 5.5),
+              painter: StudyCoursePainter(year: 4),
             ),
           ),
           const SizedBox(height: 40),
@@ -301,7 +301,7 @@ class StudyCoursePainter extends CustomPainter {
 
     line(year >= 4, Offset(segment1 + 1.5, cy), c4, canvas, paint);
     line(year >= 5, c4, c5, canvas, paint);
-    circle(year > 4, c4, canvas, paint);
+    circle(year >= 4, c4, canvas, paint);
     line(year > 5, c5, Offset(segment1 + segment2, cy), canvas, paint);
     circle(year >= 5, c5, canvas, paint);
 

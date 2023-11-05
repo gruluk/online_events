@@ -140,7 +140,7 @@ sealed class OnlineTheme {
     decoration: TextDecoration.none,
   );
 
-  static const logInnPageHeader = TextStyle(
+  static const loginPageHeader = TextStyle(
     fontFamily: font,
     color: white,
     fontWeight: FontWeight.w600,
@@ -150,11 +150,11 @@ sealed class OnlineTheme {
     decoration: TextDecoration.none,
   );
 
-  static const logInnPageEmail = TextStyle(
+  static const loginPageEmail = TextStyle(
     fontFamily: font,
     color: white,
     fontWeight: FontWeight.w400,
-    fontSize: 14,
+    fontSize: 16,
     height: 1.5,
     fontStyle: FontStyle.normal,
     decoration: TextDecoration.none,

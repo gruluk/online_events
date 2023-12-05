@@ -1,13 +1,19 @@
 import 'dart:convert';
 
 import 'package:online_events/core/models/article_model.dart';
-import 'package:online_events/core/models/attendance_model.dart';
+import 'package:online_events/core/models/attendee_info_model.dart';
+import 'package:online_events/core/models/user_model.dart';
 
 import '../models/event_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class Client {
   static const endpoint = 'https://old.online.ntnu.no';
+  static String? accessToken;
+
+  static void setAccessToken(String token) {
+    accessToken = token; 
+  }
 
   static Future<List<EventModel>?> getEvents() async {
     const url = '$endpoint/api/v1/event/events/';
@@ -30,6 +36,44 @@ abstract class Client {
     } else {
       print('Fail');
       return [];
+    }
+  }
+
+  static Future<UserModel?> getUserProfile() async {
+    const url = '$endpoint/api/v1/profile/';
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      return UserModel.fromJson(jsonResponse);
+    } else {
+      print('Failed to fetch user profile');
+      return null;
+    }
+  }
+
+  static Future<AttendeeInfoModel?> getAttendeeInfoModel() async {
+    const url = '$endpoint/api/v1/attendance-events/?ordering=-registration_start/';
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        'Authorization': 'Bearer $accessToken',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+      return AttendeeInfoModel.fromJson(jsonResponse);
+    } else {
+      print('Failed to fetch attendees info');
+      return null;
     }
   }
 
@@ -57,27 +101,4 @@ abstract class Client {
     }
   }
 
-  static Future<List<AttendanceModel>?> getAttendance() async {
-    const url = '$endpoint/api/v1/attendance-events//';
-
-    final response = await http.get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      final responseBody =
-          utf8.decode(response.bodyBytes, allowMalformed: true);
-      final jsonResponse = jsonDecode(responseBody);
-
-      final attendances = jsonResponse['results']
-          .map((attendanceJson) {
-            return AttendanceModel.fromJson(attendanceJson);
-          })
-          .cast<AttendanceModel>()
-          .toList();
-
-      return attendances;
-    } else {
-      print('Failed to fetch attendances');
-      return null;
-    }
-  }
 }

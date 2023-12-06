@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.7
-  http: ^1.1.0
+  http: ^0.13.6
   carousel_slider: ^4.0.0
   intl: ^0.17.0
   flutter_secure_storage: ^9.0.0

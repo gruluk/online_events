@@ -5,19 +5,25 @@ import 'package:online_events/services/env.dart';
 import 'package:online_events/services/secure_storage.dart';
 import '/components/online_scaffold.dart';
 import '/services/app_navigator.dart';
-import 'core/client/client.dart';
+import 'core/client/virgin_client.dart';
 import 'core/models/event_model.dart';
 import 'theme/theme.dart';
+import 'package:appwrite/appwrite.dart';
 
+Client appwriteClient = Client();
 bool loggedIn = false;
 
 Future main() async {
   runApp(const MainApp());
 
+  appwriteClient
+      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+      .setProject('65706141ead327e0436a'); // Your project ID
   await Env.initialize();
   SecureStorage.initialize();
 
-  Future.wait([Client.getEvents(), Client.getArticles()]).then((responses) {
+  Future.wait([VirginClient.getEvents(), VirginClient.getArticles()])
+      .then((responses) {
     final events = responses[0] as List<EventModel>?;
     final articles = responses[1] as List<ArticleModel>?;
 
@@ -28,7 +34,6 @@ Future main() async {
     if (articles != null) {
       articleModels.addAll(articles);
     }
-
 
     PageNavigator.navigateTo(const HomePage());
   });

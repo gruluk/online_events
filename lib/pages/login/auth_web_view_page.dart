@@ -4,7 +4,7 @@ import 'package:online_events/main.dart';
 import 'package:online_events/pages/profile/display_profile_page.dart';
 import 'package:online_events/pages/profile/profile_page.dart';
 import 'package:online_events/services/app_navigator.dart';
-import '../../core/client/client.dart';
+import '../../core/client/virgin_client.dart';
 import 'auth_service.dart';
 
 class LoginWebView extends StatefulWidget {
@@ -36,7 +36,7 @@ class LoginWebViewState extends State<LoginWebView> {
                 // Navigate to the ProfilePage with the token data
                 PageNavigator.navigateTo(const ProfilePageDisplay());
                 print('tokendata: $tokenData');
-                Client.setAccessToken(tokenData['access_token']);
+                VirginClient.setAccessToken(tokenData['access_token']);
                 setState(() {
                   loggedIn = true;
                 });

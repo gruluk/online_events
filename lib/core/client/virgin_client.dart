@@ -7,7 +7,7 @@ import 'package:online_events/core/models/user_model.dart';
 import '../models/event_model.dart';
 import 'package:http/http.dart' as http;
 
-abstract class Client {
+abstract class VirginClient {
   static const endpoint = 'https://old.online.ntnu.no';
   static String? accessToken;
 

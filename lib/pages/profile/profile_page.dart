@@ -4,7 +4,7 @@ import 'package:online_events/components/animated_button.dart';
 import 'package:online_events/pages/home/home_page.dart';
 import 'package:online_events/pages/loading/loading_display_page.dart';
 
-import '../../core/client/client.dart';
+import '../../core/client/virgin_client.dart';
 import '../../core/models/user_model.dart';
 import '/components/online_scaffold.dart';
 import '/components/online_header.dart';
@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _fetchUserProfile() async {
-    UserModel? profile = await Client.getUserProfile();
+    UserModel? profile = await VirginClient.getUserProfile();
     if (profile != null) {
       setState(() {
         userProfile = profile;

@@ -15,13 +15,6 @@ Client appwriteClient = Client(); // Global Appwrite client
 
 Future main() async {
   runApp(const MainApp());
-
-
-  appwriteClient
-      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
-      .setProject('65706141ead327e0436a'); // Your project ID
-
-      
   await Env.initialize();
   SecureStorage.initialize();
 

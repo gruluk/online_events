@@ -23,6 +23,9 @@ class ProfileButton extends StatelessWidget {
 
   void onPressed() {
     if (loggedIn) {
+       appwriteClient
+      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+      .setProject('65706141ead327e0436a'); // Your project ID
       PageNavigator.navigateTo(const ProfilePageDisplay());
     } else {
       PageNavigator.navigateTo(LoginPage() as OnlinePage);

@@ -6,6 +6,7 @@ import 'package:online_events/theme/theme.dart';
 
 class LoginPage extends StatelessWidget {
   final Client _client = Client();
+  
 
   LoginPage({Key? key}) : super(key: key) {
     _client

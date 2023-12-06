@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_events/components/animated_button.dart';
+import 'package:online_events/components/online_scaffold.dart';
 import 'package:online_events/pages/profile/display_profile_page.dart';
 import '../../main.dart';
 import '/pages/profile/profile_page.dart';
@@ -24,7 +25,7 @@ class ProfileButton extends StatelessWidget {
     if (loggedIn) {
       PageNavigator.navigateTo(const ProfilePageDisplay());
     } else {
-      PageNavigator.navigateTo(LoginPage());
+      PageNavigator.navigateTo(LoginPage() as OnlinePage);
     }
   }
 

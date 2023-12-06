@@ -1,13 +1,45 @@
 import 'package:flutter/material.dart';
-import '/pages/login/auth_web_view_page.dart';
-
+import 'package:appwrite/appwrite.dart';
+import 'package:online_events/components/animated_button.dart';
+import 'package:online_events/components/online_header.dart';
 import 'package:online_events/theme/theme.dart';
-import '/components/online_scaffold.dart';
-import '/components/animated_button.dart';
-import '/components/online_header.dart';
 
-class LoginPage extends StaticPage {
-  const LoginPage({super.key});
+class LoginPage extends StatelessWidget {
+  final Client _client = Client();
+
+  LoginPage({Key? key}) : super(key: key) {
+    _client
+      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+      .setProject('65706141ead327e0436a'); // Your project ID
+  }
+
+  void _login(BuildContext context) async {
+    final account = Account(_client);
+    try {
+      await account.createOAuth2Session(
+        provider: 'openid', // Your provider
+        success: 'https://cloud.appwrite.io/v1/account/sessions/oauth2/callback/oidc/65706141ead327e0436a',
+        // Remove the failure URL and handle errors in catch block
+      );
+      // Handle the success, such as navigating to a different page
+    } catch (e) {
+      // Handle error within the app
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Login Failed'),
+          content: Text('An error occurred during login. Please try again.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget? header(BuildContext context) {
@@ -35,9 +67,7 @@ class LoginPage extends StaticPage {
             const SizedBox(height: 24),
             AnimatedButton(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const LoginWebView(),
-                ));
+                //TODO
               },
               childBuilder: (context, hover, pointerDown) {
                 return Container(
@@ -59,5 +89,11 @@ class LoginPage extends StaticPage {
         ),
       ),
     );
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return LoginPage();
   }
 }

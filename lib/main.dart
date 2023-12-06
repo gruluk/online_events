@@ -8,16 +8,24 @@ import '/services/app_navigator.dart';
 import 'core/client/client.dart';
 import 'core/models/event_model.dart';
 import 'theme/theme.dart';
+import 'package:appwrite/appwrite.dart';
 
 bool loggedIn = false;
+Client appwriteClient = Client(); // Global Appwrite client
 
 Future main() async {
   runApp(const MainApp());
 
+
+  appwriteClient
+      .setEndpoint('https://cloud.appwrite.io/v1') // Your Appwrite Endpoint
+      .setProject('65706141ead327e0436a'); // Your project ID
+
+      
   await Env.initialize();
   SecureStorage.initialize();
 
-  Future.wait([Client.getEvents(), Client.getArticles()]).then((responses) {
+  Future.wait([VirginClient.getEvents(), VirginClient.getArticles()]).then((responses) {
     final events = responses[0] as List<EventModel>?;
     final articles = responses[1] as List<ArticleModel>?;
 

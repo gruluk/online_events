@@ -30,7 +30,7 @@ class MyEventsPage extends ScrollablePage {
     if (loggedIn) {
       PageNavigator.navigateTo(const ProfilePageDisplay());
     } else {
-      PageNavigator.navigateTo(LoginPage());
+      PageNavigator.navigateTo(LoginPage() as OnlinePage);
     }
   }
 

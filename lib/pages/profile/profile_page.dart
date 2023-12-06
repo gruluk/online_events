@@ -33,7 +33,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _fetchUserProfile() async {
-    UserModel? profile = await Client.getUserProfile();
+    UserModel? profile = await VirginClient.getUserProfile();
     if (profile != null) {
       setState(() {
         userProfile = profile;

@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:online_events/components/animated_button.dart';
 import 'package:online_events/core/models/article_model.dart';
-import 'package:online_events/core/models/event_model.dart';
 import 'package:online_events/pages/article/second_article_page.dart';
-import 'package:online_events/pages/event/event_page.dart';
 
 import '/services/page_navigator.dart';
-import '/pages/home/event_card.dart';
-import '/theme/themed_icon.dart';
 
 import '../../theme/theme.dart';
 

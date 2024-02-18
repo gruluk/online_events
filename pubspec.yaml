@@ -1,10 +1,10 @@
 name: online
 description: Online App
-publish_to: 'none'
+publish_to: "none"
 version: 0.9.2
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -35,8 +35,6 @@ dependencies:
   timezone: ^0.9.2
   android_intent_plus: ^4.0.3
   flutter_markdown: ^0.6.19
- 
-
 
 dev_dependencies:
   flutter_test:
@@ -56,17 +54,17 @@ flutter:
     - html/
 
   fonts:
-      - family: SourceSans
-        fonts:
-          - asset: assets/fonts/Poppins-ExtraLight.ttf
-            weight: 200
-          - asset: assets/fonts/Poppins-Light.ttf
-            weight: 300
-          - asset: assets/fonts/Poppins-Regular.ttf
-            weight: 400
-          - asset: assets/fonts/Poppins-Medium.ttf
-            weight: 500
-          - asset: assets/fonts/Poppins-SemiBold.ttf
-            weight: 600
-          - asset: assets/fonts/Poppins-Bold.ttf
-            weight: 700
+    - family: SourceSans
+      fonts:
+        - asset: assets/fonts/Poppins-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Poppins-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
